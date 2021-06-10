@@ -57,8 +57,8 @@ public class AddNodeTest {
         Assert.assertEquals(head.left,null);
         Assert.assertEquals(six.right,seven);
         Assert.assertEquals(seven.right,eight);
-        Assert.assertEquals(eight.right,nine);
-        Assert.assertEquals(nine.right,ten);
+        Assert.assertEquals(eight.right,ten);
+        Assert.assertEquals(ten.left,nine);
         Assert.assertEquals(ten.right,eleven);
         Assert.assertEquals(eleven.right,twelve);
         Assert.assertEquals(twelve.right,null);
@@ -116,11 +116,11 @@ public class AddNodeTest {
         Assert.assertEquals(head.left,nine);
         Assert.assertEquals(nine.left,eight);
         Assert.assertEquals(eight.left,seven);
-        Assert.assertEquals(seven.left,six);
-        Assert.assertEquals(six.left,five);
-        Assert.assertEquals(six.right,null);
-        Assert.assertEquals(five.right,null);
+        Assert.assertEquals(seven.left,five);
+        Assert.assertEquals(five.right,six);
         Assert.assertEquals(five.left,four);
+        Assert.assertEquals(six.left,null);
+        Assert.assertEquals(six.right,null);
         Assert.assertEquals(four.left,three);
         Assert.assertEquals(three.right,null);
         Assert.assertEquals(three.left,null);

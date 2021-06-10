@@ -74,6 +74,12 @@ public class BinaryTreeUtil {
 //           ADD NEW NODE
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    public static void addNode(TreeNode head,Integer[] arr){
+        for(int i=0;i<arr.length;i++){
+            doAddNode(head,new TreeNode(arr[i],null,null));
+        }
+    }
+
     public static void addNode(TreeNode head,TreeNode newNode){
         doAddNode(head,newNode);
     }
@@ -81,27 +87,26 @@ public class BinaryTreeUtil {
 
     private static void doAddNode(TreeNode currentNode, TreeNode newNode) {
         if(currentNode==null){
-            currentNode=newNode;
             return;
         }
-        if(newNode.val> currentNode.val) {
-            if(currentNode.right==null || newNode.val< currentNode.right.val){
-                newNode.right=currentNode.right;
+        if(newNode.val>currentNode.val){
+            if(currentNode.right==null){
                 currentNode.right=newNode;
                 return;
             }else{
                 doAddNode(currentNode.right,newNode);
+                return;
             }
         }
         if(newNode.val<currentNode.val){
-            if(currentNode.left==null || newNode.val>currentNode.left.val){
-                newNode.left=currentNode.left;
+            if(currentNode.left==null){
                 currentNode.left=newNode;
                 return;
-            }else{
-                doAddNode(currentNode.left,newNode);
             }
+            doAddNode(currentNode.left,newNode);
+            return;
         }
+
     }
 
 
