@@ -74,10 +74,12 @@ public class BinaryTreeUtil {
 //           ADD NEW NODE
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static void addNode(TreeNode head,Integer[] arr){
+    public static TreeNode addNode(Integer[] arr){
+        TreeNode head=new TreeNode(arr[0],null,null);
         for(int i=0;i<arr.length;i++){
             doAddNode(head,new TreeNode(arr[i],null,null));
         }
+        return head;
     }
 
     public static void addNode(TreeNode head,TreeNode newNode){

@@ -20,23 +20,19 @@ public class AddNodeTest {
 
     @Test
     public void addToMostRight(){
-        TreeNode nine=new TreeNode(9,null,null);
-        TreeNode eight=new TreeNode(8,null,nine);
-        TreeNode seven=new TreeNode(7,null,eight);
-        TreeNode six=new TreeNode(6,null,seven);
-        TreeNode head=new TreeNode(5,null,six);
-        TreeNode ten=new TreeNode(10,null,null);
-        BinaryTreeUtil.addNode(null,head);
-        BinaryTreeUtil.addNode(head,ten);
+        Integer[]arr={5,6,7,8,9};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.addNode(head,new TreeNode(10,null,null));
         Assert.assertEquals(head.val,5);
-        Assert.assertEquals(head.right,six);
+        Assert.assertEquals(head.right.val,6);
         Assert.assertEquals(head.left,null);
-        Assert.assertEquals(six.right,seven);
-        Assert.assertEquals(seven.right,eight);
-        Assert.assertEquals(eight.right,nine);
-        Assert.assertEquals(nine.right,ten);
-        Assert.assertEquals(ten.right,null);
-        Assert.assertEquals(ten.left,null);
+        Assert.assertEquals(head.right.val,6);
+        Assert.assertEquals(head.right.right.val,7);
+        Assert.assertEquals(head.right.right.right.val,8);
+        Assert.assertEquals(head.right.right.right.right.val,9);
+        Assert.assertEquals(head.right.right.right.right.right.val,10);
+        Assert.assertEquals(head.right.right.right.right.right.right,null);
+        Assert.assertEquals(head.right.right.right.right.right.left,null);
     }
 
 
