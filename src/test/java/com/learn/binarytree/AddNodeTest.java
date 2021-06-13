@@ -96,34 +96,45 @@ public class AddNodeTest {
 
     @Test
     public void addToMiddleLeft(){
-        TreeNode three=new TreeNode(3,null,null);
-        TreeNode four=new TreeNode(4,three,null);
-        TreeNode five=new TreeNode(5,four,null);
-        TreeNode seven=new TreeNode(7,five,null);
-        TreeNode eight=new TreeNode(8,seven,null);
-        TreeNode nine=new TreeNode(9,eight,null);
-        TreeNode therty=new TreeNode(30,null,null);
-        TreeNode twenty=new TreeNode(20,null,therty);
-        TreeNode head=new TreeNode(10,nine,twenty);
+        Integer[]arr={10,20,30,9,8,7,5,4,3};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
         TreeNode six=new TreeNode(6,null,null);
-        BinaryTreeUtil.addNode(null,head);
         BinaryTreeUtil.addNode(head,six);
         Assert.assertEquals(head.val,10);
-        Assert.assertEquals(head.right,twenty);
-        Assert.assertEquals(twenty.right,therty);
-        Assert.assertEquals(therty.right,null);
-        Assert.assertEquals(therty.left,null);
-        Assert.assertEquals(head.left,nine);
-        Assert.assertEquals(nine.left,eight);
-        Assert.assertEquals(eight.left,seven);
-        Assert.assertEquals(seven.left,five);
-        Assert.assertEquals(five.right,six);
-        Assert.assertEquals(five.left,four);
-        Assert.assertEquals(six.left,null);
-        Assert.assertEquals(six.right,null);
-        Assert.assertEquals(four.left,three);
-        Assert.assertEquals(three.right,null);
+        Assert.assertEquals(head.left.val,9);
+        Assert.assertEquals(head.right.val,20);
+        Assert.assertEquals(head.right.val,20);
+        Assert.assertEquals(head.right.left,null);
+        Assert.assertEquals(head.right.right.val,30);
+        Assert.assertEquals(head.right.right.val,30);
+        Assert.assertEquals(head.right.right.left,null);
+        Assert.assertEquals(head.right.right.right,null);
+        Assert.assertEquals(head.left.val,9);
+        Assert.assertEquals(head.left.left.val,8);
+        Assert.assertEquals(head.left.right,null);
+        TreeNode eight=head.left.left;
+        Assert.assertEquals(eight.val,8);
+        Assert.assertEquals(eight.left.val,7);
+        Assert.assertEquals(eight.right,null);
+        TreeNode seven=head.left.left.left;
+        Assert.assertEquals(seven.val,7);
+        Assert.assertEquals(seven.left.val,5);
+        Assert.assertEquals(seven.right,null);
+        TreeNode five=seven.left;
+        Assert.assertEquals(five.val,5);
+        Assert.assertEquals(five.left.val,4);
+        Assert.assertEquals(five.right.val,6);
+        TreeNode newSix=five.right;
+        Assert.assertEquals(newSix.val,6);
+        Assert.assertEquals(newSix.left,null);
+        Assert.assertEquals(newSix.right,null);
+        Assert.assertEquals(five.left.val,4);
+        Assert.assertEquals(five.left.left.val,3);
+        Assert.assertEquals(five.left.right,null);
+        TreeNode three=five.left.left;
+        Assert.assertEquals(three.val,3);
         Assert.assertEquals(three.left,null);
+        Assert.assertEquals(three.right,null);
     }
 
 
