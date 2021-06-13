@@ -60,7 +60,7 @@ public class AddNodeTest {
 
     @Test
     public void addToMostLeft(){
-        Integer[]arr={10,9,20,30,8,7,6};
+        Integer[]arr={10,20,30,9,8,7,6};
         TreeNode head=BinaryTreeUtil.addNode(arr);
         TreeNode five=new TreeNode(5,null,null);
         BinaryTreeUtil.addNode(head,five);
