@@ -1,6 +1,8 @@
 package com.learn.binarytree;
 
 
+import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
+
 public class BinaryTreeUtil {
 
 
@@ -118,54 +120,55 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    public static void removeNode(TreeNode head, TreeNode targetNode){
-        doRemoveNode(head,targetNode);
+    public static void removeNode(TreeNode head, Integer value){
+        doRemoveNode(head,value);
     }
 
-
-    private static void doRemoveNode(TreeNode currentNode, TreeNode targetNode) {
-        if(currentNode==null || targetNode==null){
-            return ;
-        }
-        if(currentNode.equals(targetNode)){
+    private static void doRemoveNode(TreeNode currentNode,Integer val) {
+        if(currentNode==null || currentNode.val==val){
             currentNode=null;
             return;
         }
-        if(currentNode.right.equals(targetNode)){
-            if(currentNode.right.right==null && currentNode.right.left==null){
-                currentNode.right=null;
-            }
-            else if(currentNode.right.left==null){
-                currentNode.right=currentNode.right.right;
-            }
-            else if(currentNode.right.left.val> currentNode.val){
-                currentNode.right.left.right=currentNode.right.right;
-                currentNode.right=currentNode.right.left;
-            }
-            else if(currentNode.right.left.val< currentNode.val){
-                currentNode.right.right.left=currentNode.right.left;
-                currentNode.right=currentNode.right.right;
-            }
+        if(currentNode.right.val==val && currentNode.left==null){
+            currentNode.right=currentNode.right.right;
+            return;
         }
-        if(currentNode.left.equals(targetNode)){
-            if(currentNode.left.left==null && currentNode.left.right==null){
-                currentNode.left=null;
-            }
-            else if(currentNode.left.right==null){
-                currentNode.left=currentNode.left.left;
-            }
-            else if(currentNode.left.right.val> currentNode.val){
-                currentNode.left.left.right=currentNode.left.right;
-                currentNode.left=currentNode.left.left;
-            }
-            else if(currentNode.left.right.val< currentNode.val){
-                currentNode.left.right.left=currentNode.left.left;
-                currentNode.left=currentNode.left.right;
-            }
+        if(currentNode.left.val==val && currentNode.right==null){
+            currentNode.left=currentNode.left.left;
+            return;
+        }
 
-        }
 
     }
+
+
+
+
+
+    public static Integer findMinValue(TreeNode head){
+        return doFindMinValue(head,null);
+    }
+
+    private static Integer doFindMinValue(TreeNode current, Integer min) {
+        if(current==null){
+            return min;
+        }
+        if(min==null || current.val<min){
+            min=current.val;
+        }
+        Integer leftMin= doFindMinValue(current.left,min);
+        Integer rightMin=doFindMinValue(current.right, min);
+        if(leftMin<min){
+            min=leftMin;
+            return min;
+        }
+        if(rightMin<min){
+            min=rightMin;
+            return min;
+        }
+        return min;
+    }
+
 
 
 
