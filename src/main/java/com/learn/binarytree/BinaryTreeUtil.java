@@ -120,14 +120,10 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    public static void removeNode(TreeNode head, Integer value){
-        doRemoveNode(head,value);
-    }
 
-    public BinaryTreeUtil() {
-    }
 
-    private static Boolean doRemoveNode(TreeNode currentNode, Integer val) {
+
+    public static Boolean removeNode(TreeNode currentNode, Integer val) {
        if(currentNode==null){
            return false;
        }
@@ -139,11 +135,11 @@ public class BinaryTreeUtil {
             currentNode.left=currentNode.left.left;
             return true;
        }
-       if(nodeHasTwoChildsAndRightWithTargetValue(currentNode,val)){
-           TreeNode targetNode = currentNode.right;
+       TreeNode targetNode=findTargetNodeFromTwoSons(currentNode,val);
+       if(targetNode!=null){
            Integer minFromRightSubTree=findMinValue(targetNode.right);
            if(minFromRightSubTree!=null){
-               doRemoveNode(targetNode,minFromRightSubTree);
+               removeNode(targetNode,minFromRightSubTree);
                targetNode.val=minFromRightSubTree;
                return true;
            }else{
@@ -151,23 +147,25 @@ public class BinaryTreeUtil {
                return true;
            }
        }
-       if(nodeHasTwoChildsAndLeftWithTargetValue(currentNode,val)){
-           TreeNode targetNode = currentNode.left;
-           Integer minFromRightSubTree=findMinValue(targetNode.right);
-           if(minFromRightSubTree!=null){
-               doRemoveNode(targetNode,minFromRightSubTree);
-               targetNode.val=minFromRightSubTree;
-               return true;
-           }else{
-               setNullToSonWithValueAsTargetNode(currentNode,targetNode);
-               return true;
-           }
-       }
-       if(doRemoveNode(currentNode.right,val)){
-           return doRemoveNode(currentNode.right,val);
+       if(removeNode(currentNode.right,val)){
+           return removeNode(currentNode.right,val);
        }else{
-           return doRemoveNode(currentNode.left,val);
+           return removeNode(currentNode.left,val);
        }
+    }
+
+    private static TreeNode findTargetNodeFromTwoSons(TreeNode currentNode, Integer val) {
+        if(nodeHasTwoChildsAndRightWithTargetValue(currentNode,val)){
+            return currentNode.right;
+        }
+        if(nodeHasTwoChildsAndLeftWithTargetValue(currentNode,val)){
+            return currentNode.left;
+        }
+        return null;
+    }
+
+    private static Boolean isNodeHasTwoChilds(TreeNode node) {
+        return node.left!=null && node.right!=null;
     }
 
     private static void setNullToSonWithValueAsTargetNode(TreeNode currentNode, TreeNode targetNode) {
