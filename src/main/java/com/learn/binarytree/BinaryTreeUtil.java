@@ -119,6 +119,9 @@ public class BinaryTreeUtil {
        if(currentNode==null){
            return false;
        }
+       if(currentNode.val==val){
+           replaceNodeWithLowestValueFromRightSubTree(currentNode,currentNode);
+       }
        if(checkOneChildWithTargetValue(currentNode,val)){
            return true;
        }
