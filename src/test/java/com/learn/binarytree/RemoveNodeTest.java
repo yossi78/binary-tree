@@ -13,46 +13,91 @@ public class RemoveNodeTest {
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
         BinaryTreeUtil.removeNode(head,20);
-        Assert.assertEquals(head.val,80);
-        Assert.assertEquals(head.left.val,40);
-        Assert.assertEquals(head.right.val,300);
+        validateNode(head,80,40,300);
         TreeNode fourty=head.left;
-        Assert.assertEquals(fourty.val,40);
-        Assert.assertEquals(fourty.left.val,25);
-        Assert.assertEquals(fourty.right.val,50);
+        validateNode(fourty,40,25,50);
         TreeNode twentyFive=head.left.left;
-        Assert.assertEquals(twentyFive.val,25);
-        Assert.assertEquals(twentyFive.left.val,10);
-        Assert.assertEquals(twentyFive.right,null);
+        validateNodeWithNoGrandSons(twentyFive,25,10,null);
         TreeNode fivety=head.left.right;
-        Assert.assertEquals(fivety.val,50);
-        Assert.assertEquals(fivety.left.val,45);
-        Assert.assertEquals(fivety.right.val,60);
+        validateNodeWithNoGrandSons(fivety,50,45,60);
         TreeNode threeHundried=head.right;
-        Assert.assertEquals(threeHundried.val,300);
-        Assert.assertEquals(threeHundried.left.val,200);
-        Assert.assertEquals(threeHundried.right.val,500);
-        TreeNode twoHundried=head.right.left;
-        Assert.assertEquals(twoHundried.val,200);
-        Assert.assertEquals(twoHundried.left.val,100);
-        Assert.assertEquals(twoHundried.right.val,250);
-        TreeNode fiveHundried=head.right.right;
-        Assert.assertEquals(fiveHundried.val,500);
-        Assert.assertEquals(fiveHundried.left.val,400);
-        Assert.assertEquals(fiveHundried.right.val,700);
-        assertNodeWithNoChilds(twentyFive.left,10);
-        assertNodeWithNoChilds(fivety.left,45);
-        assertNodeWithNoChilds(fivety.right,60);
-        assertNodeWithNoChilds(twoHundried.left,100);
-        assertNodeWithNoChilds(twoHundried.right,250);
-        assertNodeWithNoChilds(fiveHundried.left,400);
-        assertNodeWithNoChilds(fiveHundried.right,700);
+        validateNode(threeHundried,300,200,500);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,100,250);
+        TreeNode fiveHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
     }
 
 
-    private static  void assertNodeSingleChilds(TreeNode node,Integer value){
-        Assert.assertTrue(node.val==value && node.right==null && node.left==null);
+
+
+
+
+    private static  void validateNode(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
+        Boolean result=true;
+        if(node.val!=value){
+            result=false;
+        }
+        if(leftValue==null && node.left!=null){
+            result=false;
+        }
+        if(rightValue==null && node.right!=null){
+            result=false;
+        }
+        if(leftValue!=null && leftValue!=node.left.val){
+            result=false;
+        }
+        if(rightValue!=null && rightValue!=node.right.val){
+            result=false;
+        }
+        Assert.assertTrue(result);
     }
+
+
+
+
+
+    private static  void validateNodeWithNoGrandSons(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
+        Boolean result=true;
+        if(node.val!=value){
+            result=false;
+        }
+        if(leftValue==null && node.left!=null){
+            result=false;
+        }
+        if(rightValue==null && node.right!=null){
+            result=false;
+        }
+        if(leftValue!=null && leftValue!=node.left.val){
+            result=false;
+        }
+        if(rightValue!=null && rightValue!=node.right.val){
+            result=false;
+        }
+        if(leftValue!=null &&  hasChild(node.left)){
+            result=false;
+        }
+        if(rightValue!=null && hasChild(node.right)){
+            result=false;
+        }
+        Assert.assertTrue(result);
+    }
+
+
+
+    private static Boolean hasChild(TreeNode node){
+        if(node.left!=null || node.left!=null){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+//    private static  void assertNodeSingleChilds(TreeNode node,Integer value){
+//        Assert.assertTrue(node.val==value && node.right==null && node.left==null);
+//    }
 
     private static  void assertNodeWithNoChilds(TreeNode node,Integer value){
         Assert.assertTrue(node.val==value && node.right==null && node.left==null);
