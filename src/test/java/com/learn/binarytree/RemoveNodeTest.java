@@ -10,6 +10,26 @@ public class RemoveNodeTest {
 
 
     @Test
+    public void removeMiddleLeftLeafNode(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,100);
+        validateNode(head,80,40,300);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode threeHundried=head.right;
+        validateNode(threeHundried,300,200,500);
+        TreeNode twenty=fourty.left;
+        validateNodeWithNoGrandSons(twenty,20,10,25);
+        TreeNode fivety=fourty.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,null,250);
+        TreeNode fiveHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
+    }
+
+    @Test
     public void removeMostRightNode(){
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
