@@ -120,9 +120,6 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
     public static Boolean removeNode(TreeNode currentNode, Integer val) {
        if(currentNode==null){
            return false;
