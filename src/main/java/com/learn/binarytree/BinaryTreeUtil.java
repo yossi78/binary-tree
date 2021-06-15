@@ -1,8 +1,4 @@
 package com.learn.binarytree;
-
-
-import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
-
 public class BinaryTreeUtil {
 
 
@@ -110,7 +106,6 @@ public class BinaryTreeUtil {
             doAddNode(currentNode.left,newNode);
             return;
         }
-
     }
 
 
