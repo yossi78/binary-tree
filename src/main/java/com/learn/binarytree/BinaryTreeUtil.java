@@ -126,7 +126,7 @@ public class BinaryTreeUtil {
            return true;
        }
        if(removeNode(currentNode.right,val)){
-           return removeNode(currentNode.right,val);
+           return true;
        }else{
            return removeNode(currentNode.left,val);
        }

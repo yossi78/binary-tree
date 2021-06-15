@@ -57,7 +57,7 @@ public class RemoveNodeTest {
 
 
 
-    private static  void validateNode(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
+    private void validateNode(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
         Boolean result=true;
         if(node.val!=value){
             result=false;
@@ -81,7 +81,7 @@ public class RemoveNodeTest {
 
 
 
-    private static  void validateNodeWithNoGrandSons(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
+    private void validateNodeWithNoGrandSons(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
         Boolean result=true;
         if(node.val!=value){
             result=false;
@@ -109,7 +109,7 @@ public class RemoveNodeTest {
 
 
 
-    private static Boolean hasChild(TreeNode node){
+    private Boolean hasChild(TreeNode node){
         if(node.left!=null || node.left!=null){
             return true;
         }
