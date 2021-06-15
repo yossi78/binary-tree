@@ -8,8 +8,32 @@ import org.junit.Test;
 public class RemoveNodeTest {
 
 
+
+
     @Test
-    public void noChildsRightest(){
+    public void removeMostLeftNode(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,10);
+        validateNode(head,80,40,300);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode twenty=head.left.left;
+        validateNodeWithNoGrandSons(twenty,20,null,25);
+        TreeNode fivety=head.left.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode threeHundried=head.right;
+        validateNode(threeHundried,300,200,500);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,100,250);
+        TreeNode fiveHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
+    }
+
+
+
+    @Test
+    public void removeLeftNodeWithNoGrandSons(){
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
         BinaryTreeUtil.removeNode(head,20);

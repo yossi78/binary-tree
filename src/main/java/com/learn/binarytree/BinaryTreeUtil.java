@@ -124,7 +124,10 @@ public class BinaryTreeUtil {
         doRemoveNode(head,value);
     }
 
-    private static Boolean doRemoveNode(TreeNode currentNode,Integer val) {
+    public BinaryTreeUtil() {
+    }
+
+    private static Boolean doRemoveNode(TreeNode currentNode, Integer val) {
        if(currentNode==null){
            return false;
        }
@@ -144,8 +147,7 @@ public class BinaryTreeUtil {
                targetNode.val=minFromRightSubTree;
                return true;
            }else{
-               targetNode=null;
-               currentNode.right=null;
+               setNullToSonWithValueAsTargetNode(currentNode,targetNode);
                return true;
            }
        }
@@ -157,8 +159,7 @@ public class BinaryTreeUtil {
                targetNode.val=minFromRightSubTree;
                return true;
            }else{
-               targetNode=null;
-               currentNode.right=null;
+               setNullToSonWithValueAsTargetNode(currentNode,targetNode);
                return true;
            }
        }
@@ -167,6 +168,15 @@ public class BinaryTreeUtil {
        }else{
            return doRemoveNode(currentNode.left,val);
        }
+    }
+
+    private static void setNullToSonWithValueAsTargetNode(TreeNode currentNode, TreeNode targetNode) {
+        if(currentNode.left!=null && currentNode.left.val==targetNode.val){
+            currentNode.left=null;
+        }
+        if(currentNode.right!=null && currentNode.right.val==targetNode.val){
+            currentNode.right=null;
+        }
     }
 
     private static boolean nodeHasTwoChildsAndLeftWithTargetValue(TreeNode currentNode, Integer val) {
