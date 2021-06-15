@@ -10,47 +10,6 @@ public class RemoveNodeTest {
 
 
     @Test
-    public void removeMiddleRightLeafNode(){
-        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
-        TreeNode head=BinaryTreeUtil.addNode(arr);
-        BinaryTreeUtil.removeNode(head,250);
-        validateNode(head,80,40,300);
-        TreeNode fourty=head.left;
-        validateNode(fourty,40,20,50);
-        TreeNode threeHundried=head.right;
-        validateNode(threeHundried,300,200,500);
-        TreeNode twenty=fourty.left;
-        validateNodeWithNoGrandSons(twenty,20,10,25);
-        TreeNode fivety=fourty.right;
-        validateNodeWithNoGrandSons(fivety,50,45,60);
-        TreeNode twoHundried=threeHundried.left;
-        validateNodeWithNoGrandSons(twoHundried,200,100,null);
-        TreeNode fiveHundried=threeHundried.right;
-        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
-    }
-
-
-    @Test
-    public void removeMiddleLeftLeafNode(){
-        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
-        TreeNode head=BinaryTreeUtil.addNode(arr);
-        BinaryTreeUtil.removeNode(head,100);
-        validateNode(head,80,40,300);
-        TreeNode fourty=head.left;
-        validateNode(fourty,40,20,50);
-        TreeNode threeHundried=head.right;
-        validateNode(threeHundried,300,200,500);
-        TreeNode twenty=fourty.left;
-        validateNodeWithNoGrandSons(twenty,20,10,25);
-        TreeNode fivety=fourty.right;
-        validateNodeWithNoGrandSons(fivety,50,45,60);
-        TreeNode twoHundried=threeHundried.left;
-        validateNodeWithNoGrandSons(twoHundried,200,null,250);
-        TreeNode fiveHundried=threeHundried.right;
-        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
-    }
-
-    @Test
     public void removeMostRightNode(){
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
@@ -69,7 +28,6 @@ public class RemoveNodeTest {
         TreeNode fiveHundried=threeHundried.right;
         validateNodeWithNoGrandSons(fiveHundried,500,400,null);
     }
-
 
 
     @Test
@@ -95,7 +53,51 @@ public class RemoveNodeTest {
 
 
     @Test
-    public void removeLeftNodeWithNoGrandSons(){
+    public void removeLeftLeafNodeFromMiddleOfTree(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,100);
+        validateNode(head,80,40,300);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode threeHundried=head.right;
+        validateNode(threeHundried,300,200,500);
+        TreeNode twenty=fourty.left;
+        validateNodeWithNoGrandSons(twenty,20,10,25);
+        TreeNode fivety=fourty.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,null,250);
+        TreeNode fiveHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
+    }
+
+
+
+    @Test
+    public void removeRightLeafNodeFromMiddleOfTree(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,250);
+        validateNode(head,80,40,300);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode threeHundried=head.right;
+        validateNode(threeHundried,300,200,500);
+        TreeNode twenty=fourty.left;
+        validateNodeWithNoGrandSons(twenty,20,10,25);
+        TreeNode fivety=fourty.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,100,null);
+        TreeNode fiveHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,400,700);
+    }
+
+
+
+    @Test
+    public void removeParentOfLeafsFromLeftSide(){
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
         BinaryTreeUtil.removeNode(head,20);
@@ -116,6 +118,48 @@ public class RemoveNodeTest {
 
 
 
+
+    @Test
+    public void removeParentOfLeafsFromRightSide(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,500);
+        validateNode(head,80,40,300);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode threeHundried=head.right;
+        validateNode(threeHundried,300,200,700);
+        TreeNode twenty=fourty.left;
+        validateNodeWithNoGrandSons(twenty,20,10,25);
+        TreeNode fivety=fourty.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode twoHundried=threeHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,100,250);
+        TreeNode sevenHundried=threeHundried.right;
+        validateNodeWithNoGrandSons(sevenHundried,700,400,null);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//      USEFULL METHODS
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -138,9 +182,6 @@ public class RemoveNodeTest {
         }
         Assert.assertTrue(result);
     }
-
-
-
 
 
     private void validateNodeWithNoGrandSons(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
@@ -169,19 +210,11 @@ public class RemoveNodeTest {
         Assert.assertTrue(result);
     }
 
-
-
     private Boolean hasChild(TreeNode node){
         if(node.left!=null || node.left!=null){
             return true;
         }
         return false;
     }
-
-
-
-
-
-
 
 }
