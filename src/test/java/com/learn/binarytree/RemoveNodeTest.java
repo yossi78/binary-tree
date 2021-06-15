@@ -165,7 +165,25 @@ public class RemoveNodeTest {
 
 
 
-
+    @Test
+    public void removeGrantFatherFromRightSide(){
+        Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        BinaryTreeUtil.removeNode(head,300);
+        validateNode(head,80,40,400);
+        TreeNode fourty=head.left;
+        validateNode(fourty,40,20,50);
+        TreeNode fourHundried=head.right;
+        validateNode(fourHundried,400,200,500);
+        TreeNode twenty=fourty.left;
+        validateNodeWithNoGrandSons(twenty,20,10,25);
+        TreeNode fivety=fourty.right;
+        validateNodeWithNoGrandSons(fivety,50,45,60);
+        TreeNode twoHundried=fourHundried.left;
+        validateNodeWithNoGrandSons(twoHundried,200,100,250);
+        TreeNode fiveHundried=fourHundried.right;
+        validateNodeWithNoGrandSons(fiveHundried,500,null,700);
+    }
 
 
 
