@@ -150,17 +150,23 @@ public class BinaryTreeUtil {
         if(targetNode==null){
             return false;
         }
+        replaceNodeWithLowestValueFromRightSubTree(currentNode,targetNode);
+        return true;
+    }
+
+
+
+    private static Boolean replaceNodeWithLowestValueFromRightSubTree(TreeNode parentOfTargetNode, TreeNode targetNode){
         Integer minFromRightSubTree=findMinValue(targetNode.right);
         if(minFromRightSubTree!=null){
             removeNode(targetNode,minFromRightSubTree);
             targetNode.val=minFromRightSubTree;
         }else{
-            setNullToSonWithValueAsTargetNode(currentNode,targetNode);
+            setNullToSonWithValueAsTargetNode(parentOfTargetNode,targetNode);
         }
         return true;
+
     }
-
-
 
     private static TreeNode findTargetNodeFromTwoSons(TreeNode currentNode, Integer val) {
         if(nodeHasTwoChildsAndRightWithTargetValue(currentNode,val)){
