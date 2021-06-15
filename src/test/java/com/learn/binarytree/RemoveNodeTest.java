@@ -12,10 +12,50 @@ public class RemoveNodeTest {
     public void noChildsRightest(){
         Integer[]arr={80,40,300,20,50,200,500,10,25,45,60,100,250,400,700};
         TreeNode head=BinaryTreeUtil.addNode(arr);
-        Integer min=BinaryTreeUtil.findMinValue(head);
-        System.out.println(min);
-        //BinaryTreeUtil.removeNode(head,);
+        BinaryTreeUtil.removeNode(head,20);
+        Assert.assertEquals(head.val,80);
+        Assert.assertEquals(head.left.val,40);
+        Assert.assertEquals(head.right.val,300);
+        TreeNode fourty=head.left;
+        Assert.assertEquals(fourty.val,40);
+        Assert.assertEquals(fourty.left.val,25);
+        Assert.assertEquals(fourty.right.val,50);
+        TreeNode twentyFive=head.left.left;
+        Assert.assertEquals(twentyFive.val,25);
+        Assert.assertEquals(twentyFive.left.val,10);
+        Assert.assertEquals(twentyFive.right,null);
+        TreeNode fivety=head.left.right;
+        Assert.assertEquals(fivety.val,50);
+        Assert.assertEquals(fivety.left.val,45);
+        Assert.assertEquals(fivety.right.val,60);
+        TreeNode threeHundried=head.right;
+        Assert.assertEquals(threeHundried.val,300);
+        Assert.assertEquals(threeHundried.left.val,200);
+        Assert.assertEquals(threeHundried.right.val,500);
+        TreeNode twoHundried=head.right.left;
+        Assert.assertEquals(twoHundried.val,200);
+        Assert.assertEquals(twoHundried.left.val,100);
+        Assert.assertEquals(twoHundried.right.val,250);
+        TreeNode fiveHundried=head.right.right;
+        Assert.assertEquals(fiveHundried.val,500);
+        Assert.assertEquals(fiveHundried.left.val,400);
+        Assert.assertEquals(fiveHundried.right.val,700);
+        assertNodeWithNoChilds(twentyFive.left,10);
+        assertNodeWithNoChilds(fivety.left,45);
+        assertNodeWithNoChilds(fivety.right,60);
+        assertNodeWithNoChilds(twoHundried.left,100);
+        assertNodeWithNoChilds(twoHundried.right,250);
+        assertNodeWithNoChilds(fiveHundried.left,400);
+        assertNodeWithNoChilds(fiveHundried.right,700);
+    }
 
+
+    private static  void assertNodeSingleChilds(TreeNode node,Integer value){
+        Assert.assertTrue(node.val==value && node.right==null && node.left==null);
+    }
+
+    private static  void assertNodeWithNoChilds(TreeNode node,Integer value){
+        Assert.assertTrue(node.val==value && node.right==null && node.left==null);
     }
 
 

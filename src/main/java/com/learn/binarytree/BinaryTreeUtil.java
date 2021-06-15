@@ -124,25 +124,102 @@ public class BinaryTreeUtil {
         doRemoveNode(head,value);
     }
 
-    private static void doRemoveNode(TreeNode currentNode,Integer val) {
-        if(currentNode==null || currentNode.val==val){
-            currentNode=null;
-            return;
-        }
-        if(currentNode.right.val==val && currentNode.left==null){
+    private static Boolean doRemoveNode(TreeNode currentNode,Integer val) {
+       if(currentNode==null){
+           return false;
+       }
+       if(nodeHasOnlyRightChildWithTargetValue(currentNode,val)){
             currentNode.right=currentNode.right.right;
-            return;
-        }
-        if(currentNode.left.val==val && currentNode.right==null){
+            return true;
+       }
+       if(nodeHasOnlyLeftChildWithTargetValue(currentNode,val)){
             currentNode.left=currentNode.left.left;
-            return;
+            return true;
+       }
+       if(nodeHasTwoChildsAndRightWithTargetValue(currentNode,val)){
+           TreeNode targetNode = currentNode.right;
+           Integer minFromRightSubTree=findMinValue(targetNode.right);
+           if(minFromRightSubTree!=null){
+               doRemoveNode(targetNode,minFromRightSubTree);
+               targetNode.val=minFromRightSubTree;
+               return true;
+           }else{
+               targetNode=null;
+               currentNode.right=null;
+               return true;
+           }
+       }
+       if(nodeHasTwoChildsAndLeftWithTargetValue(currentNode,val)){
+           TreeNode targetNode = currentNode.left;
+           Integer minFromRightSubTree=findMinValue(targetNode.right);
+           if(minFromRightSubTree!=null){
+               doRemoveNode(targetNode,minFromRightSubTree);
+               targetNode.val=minFromRightSubTree;
+               return true;
+           }else{
+               targetNode=null;
+               currentNode.right=null;
+               return true;
+           }
+       }
+       if(doRemoveNode(currentNode.right,val)){
+           return doRemoveNode(currentNode.right,val);
+       }else{
+           return doRemoveNode(currentNode.left,val);
+       }
+    }
+
+    private static boolean nodeHasTwoChildsAndLeftWithTargetValue(TreeNode currentNode, Integer val) {
+        if(currentNode.left!=null && currentNode.right!=null && currentNode.left.val==val){
+            return true;
         }
+        return false;
+    }
 
-
+    private static boolean nodeHasTwoChildsAndRightWithTargetValue(TreeNode currentNode, Integer val) {
+        if(currentNode.left!=null && currentNode.right!=null && currentNode.right.val==val){
+            return true;
+        }
+        return false;
     }
 
 
+    private static Boolean nodeHasOnlyRightChildWithTargetValue(TreeNode currentNode,Integer val){
+        if(currentNode.right!=null && currentNode.left==null && currentNode.right.val==val ){
+            return true;
+        }
+        return false;
+    }
 
+    private static Boolean nodeHasOnlyLeftChildWithTargetValue(TreeNode currentNode,Integer val){
+        if(currentNode.left!=null && currentNode.right==null && currentNode.left.val==val ){
+            return true;
+        }
+        return false;
+    }
+
+
+    public static Integer findMaxValue(TreeNode head){
+        return doFindMaxValue(head,null);
+    }
+
+    private static Integer doFindMaxValue(TreeNode current, Integer max) {
+        if(current==null){
+            return max;
+        }
+        if(max==null || current.val>max){
+            max=current.val;
+        }
+        Integer leftMax= doFindMaxValue(current.left,max);
+        Integer rightMax=doFindMaxValue(current.right, max);
+        if(leftMax>max){
+            max=leftMax;
+        }
+        if(rightMax>max){
+            max=rightMax;
+        }
+        return max;
+    }
 
 
     public static Integer findMinValue(TreeNode head){
@@ -160,11 +237,9 @@ public class BinaryTreeUtil {
         Integer rightMin=doFindMinValue(current.right, min);
         if(leftMin<min){
             min=leftMin;
-            return min;
         }
         if(rightMin<min){
             min=rightMin;
-            return min;
         }
         return min;
     }
