@@ -127,25 +127,11 @@ public class BinaryTreeUtil {
        if(currentNode==null){
            return false;
        }
-       if(nodeHasOnlyRightChildWithTargetValue(currentNode,val)){
-            currentNode.right=currentNode.right.right;
-            return true;
+       if(checkOneChildWithTargetValue(currentNode,val)){
+           return true;
        }
-       if(nodeHasOnlyLeftChildWithTargetValue(currentNode,val)){
-            currentNode.left=currentNode.left.left;
-            return true;
-       }
-       TreeNode targetNode=findTargetNodeFromTwoSons(currentNode,val);
-       if(targetNode!=null){
-           Integer minFromRightSubTree=findMinValue(targetNode.right);
-           if(minFromRightSubTree!=null){
-               removeNode(targetNode,minFromRightSubTree);
-               targetNode.val=minFromRightSubTree;
-               return true;
-           }else{
-               setNullToSonWithValueAsTargetNode(currentNode,targetNode);
-               return true;
-           }
+       if(checkTwoChildWhichOneHasTargetValue(currentNode,val)){
+           return true;
        }
        if(removeNode(currentNode.right,val)){
            return removeNode(currentNode.right,val);
@@ -153,6 +139,36 @@ public class BinaryTreeUtil {
            return removeNode(currentNode.left,val);
        }
     }
+
+
+    private static boolean checkOneChildWithTargetValue(TreeNode currentNode, Integer val) {
+        if(nodeHasOnlyRightChildWithTargetValue(currentNode,val)){
+            currentNode.right=currentNode.right.right;
+            return true;
+        }
+        if(nodeHasOnlyLeftChildWithTargetValue(currentNode,val)){
+            currentNode.left=currentNode.left.left;
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean checkTwoChildWhichOneHasTargetValue(TreeNode currentNode, Integer val) {
+        TreeNode targetNode=findTargetNodeFromTwoSons(currentNode,val);
+        if(targetNode==null){
+            return false;
+        }
+        Integer minFromRightSubTree=findMinValue(targetNode.right);
+        if(minFromRightSubTree!=null){
+            removeNode(targetNode,minFromRightSubTree);
+            targetNode.val=minFromRightSubTree;
+        }else{
+            setNullToSonWithValueAsTargetNode(currentNode,targetNode);
+        }
+        return true;
+    }
+
+
 
     private static TreeNode findTargetNodeFromTwoSons(TreeNode currentNode, Integer val) {
         if(nodeHasTwoChildsAndRightWithTargetValue(currentNode,val)){
@@ -164,9 +180,6 @@ public class BinaryTreeUtil {
         return null;
     }
 
-    private static Boolean isNodeHasTwoChilds(TreeNode node) {
-        return node.left!=null && node.right!=null;
-    }
 
     private static void setNullToSonWithValueAsTargetNode(TreeNode currentNode, TreeNode targetNode) {
         if(currentNode.left!=null && currentNode.left.val==targetNode.val){
