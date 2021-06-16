@@ -3,6 +3,31 @@ public class BinaryTreeUtil {
 
 
 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//           SEARCH FOR SUB-TREE
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    public static TreeNode searchBST(TreeNode currentNode, int val) {
+        if(currentNode==null){
+            return null;
+        }
+        if(currentNode.val==val){
+            return currentNode;
+        }
+        if(currentNode.right!=null && currentNode.val==val){
+            return currentNode.right;
+        }
+        if(currentNode.left!=null && currentNode.left.val==val){
+            return currentNode.left;
+        }
+        TreeNode rightCase=searchBST(currentNode.right,val);
+        if(rightCase!=null){
+            return rightCase;
+        }else{
+            return searchBST(currentNode.left,val);
+        }
+    }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //           FIND MAX DEPTH
@@ -39,11 +64,11 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    public static Integer minDepth(TreeNode root) {
-        if(root==null){
+    public static Integer minDepth(TreeNode currentNode) {
+        if(currentNode==null){
             return 0;
         }
-        return findMinDepth(root,1);
+        return findMinDepth(currentNode,1);
     }
 
 
