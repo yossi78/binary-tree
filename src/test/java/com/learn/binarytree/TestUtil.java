@@ -27,6 +27,9 @@ public class TestUtil {
 
     public static void validateNodeWithNoGrandSons(TreeNode node,Integer value,Integer leftValue,Integer rightValue){
         Boolean result=true;
+        if(node==null && value==null){
+            return;
+        }
         if(node.val!=value){
             result=false;
         }

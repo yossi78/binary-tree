@@ -4,6 +4,33 @@ public class BinaryTreeUtil {
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//           INVERT BINARY TREE
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static TreeNode invertTree(TreeNode root) {
+        return doInvertTree(root,root);
+    }
+
+    public static TreeNode doInvertTree(TreeNode root,TreeNode currentNode) {
+        if(root==null || (currentNode.left==null && currentNode.right==null)){
+            return root;
+        }
+        if(currentNode.left!=null && currentNode.right==null){
+            return doInvertTree(root,currentNode.left);
+        }
+        if(currentNode.right!=null && currentNode.left==null){
+            return doInvertTree(root,currentNode.right);
+        }
+        TreeNode oldLeft=currentNode.left;
+        currentNode.left=currentNode.right;
+        currentNode.right=oldLeft;
+        doInvertTree(root,currentNode.left);
+        doInvertTree(root,currentNode.right);
+        return root;
+    }
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //           SEARCH FOR SUB-TREE
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -98,6 +125,9 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static TreeNode addNode(Integer[] arr){
+        if(arr.length==0){
+            return null;
+        }
         TreeNode head=new TreeNode(arr[0],null,null);
         for(int i=0;i<arr.length;i++){
             doAddNode(head,new TreeNode(arr[i],null,null));
