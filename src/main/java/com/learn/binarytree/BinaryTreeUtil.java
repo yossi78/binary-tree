@@ -12,18 +12,20 @@ public class BinaryTreeUtil {
     }
 
     public static TreeNode doInvertTree(TreeNode root,TreeNode currentNode) {
-        if(root==null || (currentNode.left==null && currentNode.right==null)){
+        if(root==null || isSingle(currentNode)){
             return root;
         }
-        if(currentNode.left!=null && currentNode.right==null){
+        if(hasOneChild(currentNode)){
+            TreeNode oldLeft=currentNode.left;
+            currentNode.left=currentNode.right;
+            currentNode.right=oldLeft;
+        }
+        if(hasLeftOnly(currentNode)){
             return doInvertTree(root,currentNode.left);
         }
-        if(currentNode.right!=null && currentNode.left==null){
+        if(hasRightOnly(currentNode)){
             return doInvertTree(root,currentNode.right);
         }
-        TreeNode oldLeft=currentNode.left;
-        currentNode.left=currentNode.right;
-        currentNode.right=oldLeft;
         doInvertTree(root,currentNode.left);
         doInvertTree(root,currentNode.right);
         return root;
@@ -323,6 +325,29 @@ public class BinaryTreeUtil {
 
 
 
+
+    private static Boolean isSingle(TreeNode node){
+        return (node!=null && node.left==null && node.right==null);
+    }
+
+    private static Boolean hasRightOnly(TreeNode node){
+        return (node!=null && node.left==null && node.right!=null);
+    }
+
+    private static Boolean hasLeftOnly(TreeNode node){
+        return (node!=null && node.left!=null && node.right==null);
+    }
+
+    private static Boolean hasTwoChilds(TreeNode node){
+        return (node!=null && node.left!=null && node.right!=null);
+    }
+
+    private static Boolean hasOneChild(TreeNode node){
+        if(node!=null && (node.right!=null || node.left!=null)){
+            return true;
+        }
+        return false;
+    }
 
 }
 

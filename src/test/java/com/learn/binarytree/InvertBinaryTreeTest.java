@@ -39,4 +39,12 @@ public class InvertBinaryTreeTest {
     }
 
 
+    @Test
+    public void InvertBinaryTreeTwoNodesTest(){
+        Integer[]arr={1,2};
+        TreeNode head=BinaryTreeUtil.addNode(arr);
+        TreeNode newHead=BinaryTreeUtil.invertTree(head);
+        TestUtil.validateNodeWithNoGrandSons(newHead,1,2,null);
+    }
+
 }
