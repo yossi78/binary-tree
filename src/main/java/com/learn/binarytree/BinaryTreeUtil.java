@@ -16,9 +16,7 @@ public class BinaryTreeUtil {
             return root;
         }
         if(hasOneChild(currentNode)){
-            TreeNode oldLeft=currentNode.left;
-            currentNode.left=currentNode.right;
-            currentNode.right=oldLeft;
+            invertChilds(currentNode);
         }
         if(hasLeftOnly(currentNode)){
             return doInvertTree(root,currentNode.left);
@@ -31,6 +29,12 @@ public class BinaryTreeUtil {
         return root;
     }
 
+
+    private static void invertChilds(TreeNode node){
+        TreeNode oldLeft=node.left;
+        node.left=node.right;
+        node.right=oldLeft;
+    }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //           SEARCH FOR SUB-TREE
