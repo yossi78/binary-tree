@@ -4,14 +4,31 @@ public class BinaryTreeUtil {
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//       COUNT NODES OF BINARY TREE
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static Integer countNodes(TreeNode root){
+        Integer counter=0;
+        return doCountNodes(root);
+    }
+
+    private static Integer doCountNodes(TreeNode currentNode) {
+        if(currentNode==null){
+            return 0;
+        }
+        return 1  + doCountNodes(currentNode.left)+ doCountNodes(currentNode.right);
+    }
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //           DIAMETER OF BINARY TREE
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public  static int d=Integer.MIN_VALUE;
+    public  static int diameter =Integer.MIN_VALUE;
 
     public static int diameterOfBinaryTree(TreeNode root) {
         height(root);
-        return d;
+        return diameter;
     }
 
     public static int height(TreeNode root){
@@ -20,7 +37,7 @@ public class BinaryTreeUtil {
         }
         int leftHeight=height(root.left);
         int rightHeight=height(root.right);
-        d=Math.max(d,leftHeight+rightHeight);
+        diameter =Math.max(diameter,leftHeight+rightHeight);
         return Math.max(leftHeight,rightHeight)+1;
     }
 
@@ -37,7 +54,7 @@ public class BinaryTreeUtil {
     }
 
     public static TreeNode doInvertTree(TreeNode root,TreeNode currentNode) {
-        if(root==null || isSingle(currentNode)){
+        if(root==null || isLeafNode(currentNode)){
             return root;
         }
         if(hasOneChild(currentNode)){
@@ -358,7 +375,7 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    private static Boolean isSingle(TreeNode node){
+    private static Boolean isLeafNode(TreeNode node){
         return (node!=null && node.left==null && node.right==null);
     }
 
