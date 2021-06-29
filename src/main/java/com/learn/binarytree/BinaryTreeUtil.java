@@ -8,7 +8,6 @@ public class BinaryTreeUtil {
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static Integer countNodes(TreeNode root){
-        Integer counter=0;
         return doCountNodes(root);
     }
 
