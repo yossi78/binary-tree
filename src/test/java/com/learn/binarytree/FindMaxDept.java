@@ -5,7 +5,7 @@ import org.junit.Test;
 
 
 
-public class FindMaxDeptTest {
+public class FindMaxDept {
 
 
     @Test

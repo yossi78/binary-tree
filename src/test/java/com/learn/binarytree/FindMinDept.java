@@ -5,7 +5,7 @@ import org.junit.Test;
 
 
 
-public class FindMinDeptTest {
+public class FindMinDept {
 
 
 

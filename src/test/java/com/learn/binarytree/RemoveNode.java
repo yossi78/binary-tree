@@ -4,7 +4,7 @@ import org.junit.Test;
 
 
 
-public class RemoveNodeTest {
+public class RemoveNode {
 
 
     @Test
